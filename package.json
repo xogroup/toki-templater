@@ -1,0 +1,34 @@
+{
+  "name": "toki-templater",
+  "version": "0.0.1",
+  "private": false,
+  "description": "Plugin",
+  "homepage": "https://github.com/xogroup/toki-templater#readme",
+  "main": "lib/implementation.js",
+  "bugs": {
+    "url": "https://github.com/xogroup/toki-templater/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xogroup/toki-templater.git"
+  },
+  "keywords": [
+    "toki-templater"
+  ],
+  "scripts": {
+    "test": "node_modules/.bin/lab"
+  },
+  "author": "XO Group Team",
+  "license": "ISC",
+  "devDependencies": {
+    "code": "4.0.0",
+    "eslint": "3.10.2",
+    "eslint-plugin-xogroup": "1.x.x",
+    "lab": "12.1.0"
+  },
+  "peerDependencies": {},
+  "dependencies": {
+    "dot": "^1.1.1",
+    "joi": "^10.2.2"
+  }
+}
