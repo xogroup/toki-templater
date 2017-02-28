@@ -7,10 +7,20 @@ module.exports = function (source, schema, options = {}) {
     return new Promise( (resolve, reject) => {
 
         if (!source) {
-            source = this.action;
+            source = this.action || {};
         }
 
-        const context = options.context || this.action.contexts;
+        let context = null;
+        if (options.context) {
+            context = options.context;
+        }
+        else if (this && this.action && this.action.contexts) {
+            context = this.action.context;
+        }
+        else {
+            context = {};
+        }
+
         const sourceType = typeof source;
 
         if (sourceType === 'object') {
