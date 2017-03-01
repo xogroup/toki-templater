@@ -7,22 +7,24 @@
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-In order to start using Foo, you should...<!-- Description on how to setup and initialize your thing -->
-
-## Properties <!-- Public properties if you have any -->
-
-### name
-
-`Foo.name`
-
-Sets the name that Foo will great with the [`helloWorld()`](API.md#helloWorld()) <!-- You can link to sections within this page -->
+In order to start using the Templater, you only need to import it.<!-- Description on how to setup and initialize your thing -->
 
 ## Methods <!-- Methods too -->
 
-### bar()
+### Templater(template, schema, options)
 
-`Foo.bar()`
+Require in the module and call it with the template you want hydrated, an optional Joi schema, and any options. Returns a promise.
 
-Calls the bar function on the Foo object. Accepts optional arguments X, Y and Z for doing optional things. Returns back a Q.
+#### template
 
-### helloWorld()
+The template to be hydrated. Can be passed in as a JSON string or an option. If not provided, `this.config` will be used.
+
+#### schema
+
+An optional joi schema. Validation will be done against the hydrated object. This is only used if you pass in an object.
+
+#### options
+
+##### context
+
+Used to override the default context from `this.contexts`

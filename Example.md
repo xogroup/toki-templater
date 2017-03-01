@@ -1,20 +1,68 @@
 # Examples
 
-## Hooking up Foo
+## Basic Usage
+```Javascript
+const Templater = require('toki-templater');
 
-```javascript
-const Foo = require('foo');
-let foo = new Foo();
-
-foo.bar();
+Templater().then( (hydratedConfig) => {
+    console.log('hydrated config', hydratedConfig);
+});
 ```
 
-## Calling the hello method
+### Passing in our own object
 
-```javascript
-const Foo = require('foo');
-let foo = new Foo();
+```Javascript
+const Templater = require('toki-templater');
 
-foo.name = 'World';
-return foo.hello();
+Templater({
+    name: '{{=it.getName.output.name}}'
+}).then( (hydratedConfig) => {
+    console.log(hydratedConfig)
+});
+```
+
+### Passing in our own validator
+
+```Javascript
+const Joi = require('joi');
+const Templater = require('toki-templater');
+
+const schema = {
+    name: Joi.string().length(3)
+};
+
+Templater({
+    name: '{{=it.getName.output.name}}'
+}, schema).then( (hydratedConfig) => {
+    console.log(hydratedConfig)
+}).catch( (e) => {
+    console.log('Oops! Name not long enough!');
+});
+```
+
+### Passing in our own context
+
+```Javascript
+const Joi = require('joi');
+const Templater = require('toki-templater');
+
+const schema = {
+    name: Joi.string().length(3)
+};
+
+Templater(
+    {
+        name: '{{=it.name}}'
+    },
+    null,
+    {
+        context: {
+            name: 'Bob'
+        }
+    }
+).then( (hydratedConfig) => {
+    console.log(hydratedConfig)
+}).catch( (e) => {
+    console.log('Oops! Name not long enough!');
+});
 ```

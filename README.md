@@ -2,10 +2,10 @@
 > Implements Foo which is great for Bar <!-- Repo Brief Description -->
 
 <!-- Long Description -->
-This is an X which does Y for the purpose of Z.
+This is a templater which also provides validation. It's aware of toki standards regarding context layout, as well as Joi aware. It will gladly handle both JSON strings and objects, returning back in whatever form you provided.
 
 <!-- Maintainer (Hint, probably you) -->
-Lead Maintainer: [Your name goes here](https://github.com/Your Github URL)
+Lead Maintainer: [Derrick Hinkle](https://github.com/dhinklexo)
 
 <!-- Badges Go Here -->
 
@@ -18,10 +18,11 @@ Lead Maintainer: [Your name goes here](https://github.com/Your Github URL)
 <!-- Quick Example -->
 ## Example
 ```Javascript
-const Foo = require('foo');
-let foo = new Foo();
+const Templater = require('toki-templater');
 
-foo.bar();
+Templater(this.action).then( (hydratedConfig) => {
+    ...
+});
 ```
 <!-- Customize this if needed -->
 More examples can be found in [the examples document](Example.md) and the full api in the [API documentation](API.md).

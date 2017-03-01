@@ -16,7 +16,7 @@
     "toki-templater"
   ],
   "scripts": {
-    "test": "node_modules/.bin/lab"
+    "test": "node_modules/.bin/lab -c"
   },
   "author": "XO Group Team",
   "license": "ISC",
