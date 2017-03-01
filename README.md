@@ -10,8 +10,11 @@ Lead Maintainer: [Derrick Hinkle](https://github.com/dhinklexo)
 <!-- Badges Go Here -->
 
 <!-- Badge from https://badge.fury.io/ -->
+[![npm version](https://badge.fury.io/js/toki-templater.svg)](https://badge.fury.io/js/toki-templater)
 <!-- Build Status from Travis -->
+[![build status](https://travis-ci.org/xogroup/toki-templater.svg?branch=master)](https://travis-ci.org/xogroup/toki-templater.svg?branch=master)
 <!-- Security Scan from Snyk.io -->
+[![Known Vulnerabilities](https://snyk.io/test/github/xogroup/toki-templater/badge.svg)](https://snyk.io/test/github/xogroup/toki-templater)
 <!-- Security Scan from NSP -->
 
 <!-- End Badges -->
