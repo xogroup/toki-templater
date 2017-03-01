@@ -7,7 +7,7 @@ const lab = exports.lab = Lab.script();
 const describe = lab.describe;
 const it = lab.it;
 
-const Templater = require('../src/implementation');
+const Templater = require('../lib/implementation');
 
 describe('Templater', () => {
 
