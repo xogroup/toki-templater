@@ -1,5 +1,5 @@
 # toki-templater <!-- Repo Name -->
-> Implements Foo which is great for Bar <!-- Repo Brief Description -->
+> A powerful intelligent templater wrapper with support for validation <!-- Repo Brief Description -->
 
 <!-- Long Description -->
 This is a templater which also provides validation. It's aware of toki standards regarding context layout, as well as Joi aware. It will gladly handle both JSON strings and objects, returning back in whatever form you provided.
