@@ -90,6 +90,54 @@ describe('Templater', () => {
         });
     });
 
+    it('should fill out an array template', () => {
+
+        return Templater({ foo: '{{=it.foo}}' }, null, { context: {
+            foo: [
+                {
+                    bob: 'bar'
+                }
+            ]
+        } })
+            .then( (result) => {
+
+                expect(result).to.equal([{ bob: 'bar' }]);
+            });
+    });
+
+    it('should fill an object blob', () => {
+
+        return Templater({ foo: '{{=it.foo}}' }, null, {
+            context: {
+                foo: {
+                    bob: 'bar'
+                }
+            }
+        })
+            .then((result) => {
+
+                expect(result).to.equal({ foo: { bob: 'bar' } });
+            });
+    });
+
+    it('should fill a mutli-level object blob', () => {
+
+        return Templater({ foo: '{{=it.foo}}' }, null, {
+            context: {
+                foo: {
+                    bob: 'bar',
+                    baz: {
+                        more: 'bar'
+                    }
+                }
+            }
+        })
+            .then((result) => {
+
+                expect(result).to.equal({ foo: { bob: 'bar', baz: { more: 'bar' } } });
+            });
+    });
+
     it('should handle a schema', () => {
 
         return Templater({ foo: '{{=it.foo.bob}}' }, {
