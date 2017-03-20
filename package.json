@@ -16,19 +16,19 @@
     "toki-templater"
   ],
   "scripts": {
-    "test": "node_modules/.bin/lab -c"
+    "test": "lab -c"
   },
   "author": "XO Group Team",
   "license": "ISC",
   "devDependencies": {
-    "code": "4.0.0",
-    "eslint": "3.10.2",
+    "code": "4.x.x",
+    "eslint": "3.x.x",
     "eslint-plugin-xogroup": "1.x.x",
-    "lab": "12.1.0"
+    "lab": "12.x.x"
   },
   "peerDependencies": {},
   "dependencies": {
-    "dot": "^1.1.1",
-    "joi": "^10.2.2"
+    "hoek": "4.x.x",
+    "joi": "10.x.x"
   }
 }
