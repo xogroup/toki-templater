@@ -15,7 +15,7 @@ Templater().then( (hydratedConfig) => {
 const Templater = require('toki-templater');
 
 Templater({
-    name: '{{=it.getName.output.name}}'
+    name: '{{getName.output.name}}'
 }).then( (hydratedConfig) => {
     console.log(hydratedConfig)
 });
@@ -32,7 +32,7 @@ const schema = {
 };
 
 Templater({
-    name: '{{=it.getName.output.name}}'
+    name: '{{getName.output.name}}'
 }, schema).then( (hydratedConfig) => {
     console.log(hydratedConfig)
 }).catch( (e) => {
@@ -52,7 +52,7 @@ const schema = {
 
 Templater(
     {
-        name: '{{=it.name}}'
+        name: '{{name}}'
     },
     null,
     {
