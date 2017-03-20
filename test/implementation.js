@@ -37,7 +37,7 @@ describe('Templater', () => {
 
     it('should fill out an object template', () => {
 
-        return Templater({ foo: '{{=it.bob}}' }, null, { context: {
+        return Templater({ foo: '{{bob}}' }, null, { context: {
             bob: 'bar'
         } })
         .then( (result) => {
@@ -49,7 +49,7 @@ describe('Templater', () => {
     it('should default to the local context', () => {
 
         const localContext = {
-            config: { foo: '{{=it.bob}}' },
+            config: { foo: '{{bob}}' },
             contexts: {
                 bob: 'bar'
             }
@@ -79,7 +79,7 @@ describe('Templater', () => {
 
     it('should fill out a multi-level object template', () => {
 
-        return Templater({ foo: '{{=it.foo.bob}}' }, null, { context: {
+        return Templater({ foo: '{{foo.bob}}' }, null, { context: {
             foo: {
                 bob: 'bar'
             }
@@ -92,7 +92,28 @@ describe('Templater', () => {
 
     it('should fill out an array template', () => {
 
-        return Templater({ foo: '{{=it.foo}}' }, null, { context: {
+        return Templater(['{{foo}}', '{{bar}}', '{{bob}}'], null, { context: {
+            foo: 'foo stuff',
+            bar: {
+                bar: 'stuff'
+            },
+            bob: ['b', 'o', 'b']
+        } })
+            .then( (result) => {
+
+                expect(result).to.equal([
+                    'foo stuff',
+                    {
+                        bar: 'stuff'
+                    },
+                    ['b', 'o', 'b']
+                ]);
+            });
+    });
+
+    it('should hydrate an array value', () => {
+
+        return Templater({ foo: '{{foo}}' }, null, { context: {
             foo: [
                 {
                     bob: 'bar'
@@ -101,13 +122,13 @@ describe('Templater', () => {
         } })
             .then( (result) => {
 
-                expect(result).to.equal([{ bob: 'bar' }]);
+                expect(result).to.equal({ foo: [{ bob: 'bar' }] });
             });
     });
 
     it('should fill an object blob', () => {
 
-        return Templater({ foo: '{{=it.foo}}' }, null, {
+        return Templater({ foo: '{{foo}}' }, null, {
             context: {
                 foo: {
                     bob: 'bar'
@@ -122,7 +143,7 @@ describe('Templater', () => {
 
     it('should fill a mutli-level object blob', () => {
 
-        return Templater({ foo: '{{=it.foo}}' }, null, {
+        return Templater({ foo: '{{foo}}' }, null, {
             context: {
                 foo: {
                     bob: 'bar',
@@ -140,7 +161,7 @@ describe('Templater', () => {
 
     it('should handle a schema', () => {
 
-        return Templater({ foo: '{{=it.foo.bob}}' }, {
+        return Templater({ foo: '{{foo.bob}}' }, {
             foo: Joi.string()
         }, { context: {
             foo: {
@@ -155,7 +176,7 @@ describe('Templater', () => {
 
     it('should reject when a schema fails', () => {
 
-        return Templater({ foo: '{{=it.foo.bob}}' }, {
+        return Templater({ foo: '{{foo.bob}}' }, {
             bob: Joi.string()
         }, { context: {
             foo: {
