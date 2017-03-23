@@ -174,6 +174,24 @@ describe('Templater', () => {
         });
     });
 
+    it('should handle a schema with options', () => {
+
+        return Templater({ foo: '{{foo.bob}}', baz: 'please do not fail me' }, {
+            foo: Joi.string()
+        }, {
+            context: {
+                foo: {
+                    bob: 'bar'
+                }
+            },
+            allowUnknown: true
+        })
+        .then( (result) => {
+
+            expect(result).to.equal({ foo: 'bar', baz: 'please do not fail me' });
+        });
+    });
+
     it('should reject when a schema fails', () => {
 
         return Templater({ foo: '{{foo.bob}}' }, {
