@@ -37,7 +37,7 @@ describe('Templater', () => {
 
     it('should fill out an object template', () => {
 
-        return Templater({ foo: '{{bob}}' }, null, { context: {
+        return Templater({ foo: '{{bob}}' }, null, { hydrationContext: {
             bob: 'bar'
         } })
         .then( (result) => {
@@ -48,7 +48,7 @@ describe('Templater', () => {
 
     it('should leave unfilled templates in place', () => {
 
-        return Templater({ foo: '{{bob}}', bar: '{{baz}}' }, null, { context: {
+        return Templater({ foo: '{{bob}}', bar: '{{baz}}' }, null, { hydrationContext: {
             bob: 'bar'
         } })
         .then( (result) => {
@@ -90,7 +90,7 @@ describe('Templater', () => {
 
     it('should fill out a multi-level object template', () => {
 
-        return Templater({ foo: '{{foo.bob}}' }, null, { context: {
+        return Templater({ foo: '{{foo.bob}}' }, null, { hydrationContext: {
             foo: {
                 bob: 'bar'
             }
@@ -103,7 +103,7 @@ describe('Templater', () => {
 
     it('should fill out an array template', () => {
 
-        return Templater(['{{foo}}', '{{bar}}', '{{bob}}'], null, { context: {
+        return Templater(['{{foo}}', '{{bar}}', '{{bob}}'], null, { hydrationContext: {
             foo: 'foo stuff',
             bar: {
                 bar: 'stuff'
@@ -124,7 +124,7 @@ describe('Templater', () => {
 
     it('should hydrate an array value', () => {
 
-        return Templater({ foo: '{{foo}}' }, null, { context: {
+        return Templater({ foo: '{{foo}}' }, null, { hydrationContext: {
             foo: [
                 {
                     bob: 'bar'
@@ -140,7 +140,7 @@ describe('Templater', () => {
     it('should fill an object blob', () => {
 
         return Templater({ foo: '{{foo}}' }, null, {
-            context: {
+            hydrationContext: {
                 foo: {
                     bob: 'bar'
                 }
@@ -155,7 +155,7 @@ describe('Templater', () => {
     it('should fill a mutli-level object blob', () => {
 
         return Templater({ foo: '{{foo}}' }, null, {
-            context: {
+            hydrationContext: {
                 foo: {
                     bob: 'bar',
                     baz: {
@@ -174,7 +174,7 @@ describe('Templater', () => {
 
         return Templater({ foo: '{{foo.bob}}' }, {
             foo: Joi.string()
-        }, { context: {
+        }, { hydrationContext: {
             foo: {
                 bob: 'bar'
             }
@@ -190,12 +190,14 @@ describe('Templater', () => {
         return Templater({ foo: '{{foo.bob}}', baz: 'please do not fail me' }, {
             foo: Joi.string()
         }, {
-            context: {
+            hydrationContext: {
                 foo: {
                     bob: 'bar'
                 }
             },
-            allowUnknown: true
+            joiOptions      : {
+                allowUnknown : true
+            }
         })
         .then( (result) => {
 
@@ -207,7 +209,7 @@ describe('Templater', () => {
 
         return Templater({ foo: '{{foo.bob}}' }, {
             bob: Joi.string()
-        }, { context: {
+        }, { hydrationContext: {
             foo: {
                 bob: 'bar'
             }
@@ -218,4 +220,19 @@ describe('Templater', () => {
         });
     });
 
+    it('should not throw uncaught errors when hydrationContext is not an object', () => {
+
+        return Templater({ foo: '{{foo.bob}}' }, {
+            foo: Joi.string()
+        }, {
+            hydrationContext: 200,
+            joiOptions      : {
+                allowUnknown : true
+            }
+        })
+        .then( (result) => {
+
+            expect(result).to.equal({ foo: '{{foo.bob}}' });
+        });
+    });
 });
