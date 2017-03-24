@@ -25,6 +25,10 @@ An optional joi schema. Validation will be done against the hydrated object. Thi
 
 #### options
 
-##### context
+##### hydrationContext
 
 Used to override the default context from `this.contexts`
+
+##### joiOptions
+
+Passes options (such as `allowUnknown`) to the `Joi.validate` call if a schema is provided.
