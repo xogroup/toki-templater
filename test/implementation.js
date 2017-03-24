@@ -46,6 +46,17 @@ describe('Templater', () => {
         });
     });
 
+    it('should leave unfilled templates in place', () => {
+
+        return Templater({ foo: '{{bob}}', bar: '{{baz}}' }, null, { context: {
+            bob: 'bar'
+        } })
+        .then( (result) => {
+
+            expect(result).to.equal({ foo: 'bar', bar: '{{baz}}' });
+        });
+    });
+
     it('should default to the local context', () => {
 
         const localContext = {
