@@ -56,7 +56,7 @@ Templater(
     },
     null,
     {
-        context: {
+        hydrationContext: {
             name: 'Bob'
         }
     }
