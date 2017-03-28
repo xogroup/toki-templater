@@ -35,6 +35,33 @@ describe('Templater', () => {
         });
     });
 
+    it('should return an interpolated string', () => {
+
+        return Templater('foo {{bar}}', null, { hydrationContext: { bar: 'baz' } })
+        .then( (result) => {
+
+            expect(result).to.equal('foo baz');
+        });
+    });
+
+    it('should return an interpolated string with a stringified object', () => {
+
+        return Templater('foo {{bar}}', null, { hydrationContext: { bar: { nested: 'baz' } } })
+        .then( (result) => {
+
+            expect(result).to.equal('foo {"nested":"baz"}');
+        });
+    });
+
+    it('should return an interpolated string with multiple templated values', () => {
+
+        return Templater('/example/{{foo}}/{{bar}}/{{not.yet}}', null, { hydrationContext: { foo: 'dynamic', bar: 'route' } })
+        .then( (result) => {
+
+            expect(result).to.equal('/example/dynamic/route/{{not.yet}}');
+        });
+    });
+
     it('should fill out an object template', () => {
 
         return Templater({ foo: '{{bob}}' }, null, { hydrationContext: {

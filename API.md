@@ -19,6 +19,9 @@ Require in the module and call it with the template you want hydrated, an option
 
 The template to be hydrated. Can be passed in as a JSON string or an option. If not provided, `this.config` will be used.
 
+If the `{{}}` template handlebar is interpolated in a string (`/route/{{example.id}}`) then the returned value will be a string.
+If the template handlebar is the entire template value (`{{example}}`) then the returned value will be whatever the target value is.
+
 #### schema
 
 An optional joi schema. Validation will be done against the hydrated object. This is only used if you pass in an object.
