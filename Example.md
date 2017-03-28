@@ -66,3 +66,24 @@ Templater(
     console.log('Oops! Name not long enough!');
 });
 ```
+
+### Interpolated string
+
+```Javascript
+const Templater = require('toki-templater');
+
+Templater(
+    '/route/{{document.id}}/example',
+    null,
+    {
+        hydrationContext: {
+            document: {
+                id: 'GUID'
+            }
+        }
+    }
+).then( (hydratedConfig) => {
+    console.log(hydratedConfig);
+    // '/route/GUID/example'
+});
+```
